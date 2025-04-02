@@ -7,7 +7,7 @@ services:
     container_name: spa_front
     image: spa_front:latest
     ports:
-      - "3000:3000"
+      - "3000:4000"   # local:container
     restart: always
     depends_on:
       - backend
@@ -19,7 +19,7 @@ services:
     container_name: spa_back
     image: spa_back:latest
     ports:
-      - "3001:3001"
+      - "3001:4001"
     environment:
       - DATABASE_URL=postgres://app:!ChangeMe!@db:5432/app
     restart: always
@@ -34,7 +34,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
       POSTGRES_DB: ${POSTGRES_DB:-app}
     ports:
-      - "5432:5432"
+      - "5434:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data:rw
 
