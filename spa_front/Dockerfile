@@ -1,5 +1,5 @@
 # Utiliser une image de base officielle Node.js
-FROM node:18-bullseye AS builder
+FROM node:18-bullseye
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
@@ -17,13 +17,13 @@ COPY spa_front/ .
 RUN npm run build
 
 # Étape 2 : dev Stage
-FROM node:18-bullseye
+# FROM base as builder
 
 # Définir le répertoire de travail dans le conteneur
-WORKDIR /app
+# WORKDIR /app
 
 # Copier uniquement les fichiers de build nécessaires
-COPY --from=builder /app /app
+# COPY --from=builder /app /app
 
 # Nettoyer le cache pour réduire la taille de l'image
 RUN npm cache clean --force

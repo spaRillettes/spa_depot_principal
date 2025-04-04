@@ -1,5 +1,5 @@
 # Étape 1 : Build Stage
-FROM node:18-bullseye AS builder
+FROM node:18-bullseye
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
@@ -17,16 +17,16 @@ COPY spa_back/ .
 RUN npm run build
 
 # Étape 2 : Development Stage
-FROM node:18-bullseye
+# FROM base as builder
 
 # Définir le répertoire de travail dans le conteneur
-WORKDIR /app
+# WORKDIR /app
 
 # Copier uniquement les fichiers de build nécessaires
-COPY --from=builder /app /app
+# COPY --from=builder /app /app
 
 # Installer toutes les dépendances (y compris celles de développement)
-RUN npm install
+# RUN npm install
 
 # Nettoyer le cache pour réduire la taille de l'image
 RUN npm cache clean --force

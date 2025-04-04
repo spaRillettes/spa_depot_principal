@@ -112,8 +112,14 @@ npx prisma init
 npx prisma generate
 ```
 
-
 ## appliquer les changements du schema vers la base de données
 ```bash
 npx prisma migrate dev --name init
+ npx prisma db push
+
+```
+
+## visualiser avec prisma studio sur localhost:5555
+```bash
+npx prisma studio
 ```

@@ -6,7 +6,7 @@ export class AnimalController {
   constructor(private readonly animalService: AnimalService) {
   }
   @Post()
-  async create(@Body() createAnimalDto: { firstname: string }) {
+  async create(@Body('firstname') createAnimalDto: { firstname: string }) {
     return this.animalService.createAnimal(createAnimalDto);
   }
 }
