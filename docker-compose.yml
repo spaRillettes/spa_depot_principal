@@ -19,7 +19,7 @@ services:
     container_name: spa_back
     image: spa_back:latest
     ports:
-      - "3001:3000"
+      - "3001:3001"
     environment:
       - DATABASE_URL=postgres://app:!ChangeMe!@db:5432/app
     restart: always
