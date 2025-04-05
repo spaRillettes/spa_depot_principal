@@ -1,5 +1,4 @@
-# Ignorer les fichiers de configuration locaux
-.env
+
 
 # Ignorer les répertoires node_modules pour éviter de copier les dépendances locales
 node_modules
@@ -23,17 +22,10 @@ tmp
 
 .idea
 
-# Ignorer les fichiers de configuration Docker
-.docker
 
-# Ignorer les fichiers de cache Docker
-.dockerignore
 
 # Ignorer les fichiers de configuration de linting
 .eslintcache
-
-# Ignorer les fichiers de configuration de déploiement
-.deploy
 
 
 

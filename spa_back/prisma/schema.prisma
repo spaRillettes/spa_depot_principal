@@ -14,7 +14,167 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Adoptant {
+  id                 Int        @id @default(autoincrement())
+  nom                String
+  prenom             String
+  email              String     @unique
+  telephone          String
+  adresse            String
+  cp                 String
+  ville              String
+  historiqueAdoption String
+  commentaires       String
+  users              Users[]
+  Adoption           Adoption[]
+}
+
+model Adoption {
+  id           Int      @id @default(autoincrement())
+  dateAdoption DateTime
+  typeAdoption String // en cours, validé
+  id_animal    Int
+  id_adoptant  Int
+  animal       Animal   @relation(fields: [id_animal], references: [id])
+  adoptant     Adoptant @relation(fields: [id_adoptant], references: [id])
+}
+
 model Animal {
-  id        Int    @id @default(autoincrement())
-  firstname String
+  id               Int                @id @default(autoincrement())
+  nom              String
+  age              Int
+  sexe             String
+  espece           String
+  race             String
+  N_identification String
+  description      String
+  image            String
+  statut           String
+  dateArrivee      DateTime
+  users            Users[]
+  evolution        Evolution[]
+  suiviVeterinaire SuiviVeterinaire[]
+  parrainage       Parrainage[]
+  publication      Publication[]
+  Adoption         Adoption[]
+}
+
+model Evolution {
+  id           Int      @id @default(autoincrement())
+  id_animal    Int
+  date         DateTime
+  motif        String
+  observations String
+  animal       Animal   @relation(fields: [id_animal], references: [id])
+}
+
+model SuiviVeterinaire {
+  id                 Int      @id @default(autoincrement())
+  id_animal          Int
+  dateVisite         DateTime
+  motif              String
+  observations       String
+  traitement         String
+  validationAdoption String
+  animal             Animal   @relation(fields: [id_animal], references: [id])
+}
+
+model Parrainage {
+  id                  Int       @id @default(autoincrement())
+  id_animal           Int
+  dateDebutParrainage DateTime
+  description         String
+  dateFinParrainage   DateTime?
+  animal              Animal    @relation(fields: [id_animal], references: [id])
+  users               Users[]
+}
+
+model Publication {
+  id        Int      @id @default(autoincrement())
+  id_animal Int
+  date      DateTime
+  heure     DateTime
+  titre     String
+  article   String
+  image     String
+  animal    Animal   @relation(fields: [id_animal], references: [id])
+}
+
+model Blog {
+  id      Int      @id @default(autoincrement())
+  date    DateTime
+  heure   DateTime
+  titre   String
+  article String
+  image   String
+  users   Users[]
+}
+
+model Signalement {
+  id              Int      @id @default(autoincrement())
+  date            DateTime
+  heure           DateTime
+  lieu            String
+  description     String
+  emailFacultatif String
+}
+
+model VitrineProduits {
+  id          Int    @id @default(autoincrement())
+  nom         String
+  description String
+  prix        Float
+}
+
+model Aider {
+  id         Int      @id @default(autoincrement())
+  date       DateTime
+  nom        String
+  prenom     String
+  email      String
+  telephone  String
+  financier  Boolean
+  materiel   Boolean
+  parrainage Boolean
+  message    String
+}
+
+model Users {
+  id              Int               @id @default(autoincrement())
+  username        String            @unique //email?
+  nom             String
+  prenom          String
+  motDePasse      String            @ignore
+  telephone       String
+  adresse         String
+  cp              String
+  ville           String
+  role            String
+  adoptant        Adoptant?         @relation(fields: [adoptantId], references: [id])
+  adoptantId      Int?
+  planningBalades PlanningBalades[]
+  creneaux        Creneaux[]
+  Animal          Animal?           @relation(fields: [animalId], references: [id])
+  animalId        Int?
+  Parrainage      Parrainage?       @relation(fields: [parrainageId], references: [id])
+  parrainageId    Int?
+  Blog            Blog?             @relation(fields: [blogId], references: [id])
+  blogId          Int?
+}
+
+model PlanningBalades {
+  id         Int        @id @default(autoincrement())
+  date       DateTime
+  heure      DateTime
+  chien_chat String
+  users      Users[]
+  creneaux   Creneaux[]
+}
+
+model Creneaux {
+  id          Int             @id @default(autoincrement())
+  id_users    Int
+  id_planning Int
+  users       Users           @relation(fields: [id_users], references: [id])
+  planning    PlanningBalades @relation(fields: [id_planning], references: [id])
 }

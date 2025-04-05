@@ -1,5 +1,8 @@
-node_modules
-npm-debug.log
-Dockerfile
-.dockerignore
-dist
+# Ignorer les fichiers de build
+dist/
+
+# Ignorer les fichiers de configuration locaux
+.env.local
+
+# Ignorer les fichiers de cache
+.cache/
