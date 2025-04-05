@@ -9,7 +9,7 @@ export class AnimalService {
   async createAnimal(data: Prisma.AnimalCreateInput): Promise<any> {
     return this.prisma.animal.create({
       data: {
-        firstname: 'Spartacus',
+        ...data,
       },
     });
   }
