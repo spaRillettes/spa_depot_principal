@@ -5,16 +5,17 @@ FROM node:18-bullseye
 WORKDIR /app
 
 # Copier package.json et package-lock.json
-COPY spa_front/package*.json ./
+# COPY ./package*.json ./tsconfig.json .
+COPY . .
 
 # Installer les dépendances
-RUN npm install
+RUN npm install && npm run build && npm cache clean --force
 
 # Copier le reste de l'application
-COPY spa_front/ .
+# COPY . .
 
 # Construire l'application Next.js
-RUN npm run build
+# RUN npm run build
 
 # Étape 2 : dev Stage
 # FROM base as builder
@@ -26,7 +27,7 @@ RUN npm run build
 # COPY --from=builder /app /app
 
 # Nettoyer le cache pour réduire la taille de l'image
-RUN npm cache clean --force
+# RUN npm cache clean --force
 
 # Exposer le port sur lequel l'application va tourner
 EXPOSE 3000

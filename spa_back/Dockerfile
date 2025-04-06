@@ -5,16 +5,18 @@ FROM node:18-bullseye
 WORKDIR /app
 
 # Copier package.json et package-lock.json
-COPY spa_back/package*.json ./
+# COPY ./package*.json ./tsconfig.json .
+COPY . .
 
 # Installer toutes les dépendances (y compris celles de développement)
-RUN npm install
+RUN npm install && npm i -g typescript && npm run build && npm cache clean --force
 
 # Copier uniquement les fichiers nécessaires à la construction
-COPY spa_back/ .
+# COPY . .
 
+# RUN ls -l /app && npm run build
 # Construire l'application Nest.js
-RUN npm run build
+# RUN npm run build && npm cache clean --force
 
 # Étape 2 : Development Stage
 # FROM base as builder
@@ -29,7 +31,7 @@ RUN npm run build
 # RUN npm install
 
 # Nettoyer le cache pour réduire la taille de l'image
-RUN npm cache clean --force
+# RUN npm cache clean --force
 
 # Exposer le port sur lequel l'application va tourner
 EXPOSE 3001
