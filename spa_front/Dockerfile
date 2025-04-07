@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Installer et build le projet Next.js dans le conteneur
-RUN npm install && npm run build && npm cache clean --forcej
+RUN npm install && npm run build && npm cache clean --force
 
 # Exposer le port sur lequel l'application va tourner
 EXPOSE 3000

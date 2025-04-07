@@ -1,16 +1,6 @@
 # spa_depot_principal
 Est le dossier qui sert à centraliser les depots de l'application (**spa_front** et **spa_back**).<br>
 C'est d'ici que vous allez instancier vos conteneurs si vous travaillez sour **Docker.**
-
-## Si vous utilisez Docker :
-- Après avoir cloné le projet positionnez vous dans le dossier **spa_depot_principal**<br>
-    - ```cd spa_depot_principal```
-- Assurez vous que **Docker desktop** ou **docker daemon** (_en fonction de l'OS_) est en cours d'exécution.<br><br>
-- Lancez la création des conteneurs avec les privilèges administrateur :
-    - ```sudo docker compose up --build``` (_sur Mac et Linux_)
-    - ```docker-compose up --build``` (_sur Windows_)
-    - ```docker compose up --build``` (_aussi sur Windows_)
-
 ## Ajout de la remote front
 ```bash
 git remote add spa_front https://github.com/Cleopatatras/spa_front.git
@@ -52,5 +42,17 @@ git subtree pull --prefix=spa_front spa_front main --squash
 ```bash
 git subtree push --prefix=spa_front spa_front main
 ```
+<br><br>
 
+## Pour utilisez Docker :
+- Après avoir cloné le projet positionnez vous dans le dossier **spa_depot_principal**<br>
+    - ```cd spa_depot_principal```
+- Basculez vers la branche **develop**
+    - ```git checkout develop```
+- Assurez vous que **Docker desktop** ou **docker daemon** (_en fonction de l'OS_) est en cours d'exécution.
+    - ```docker ps```
+- Lancez la création des conteneurs avec les privilèges administrateur :
+    - ```sudo docker compose up --build``` (_sur Mac et Linux_)
+    - ```docker-compose up --build``` (_sur Windows_)
+    - ```docker compose up --build``` (_aussi sur Windows_)
 
