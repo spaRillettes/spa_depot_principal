@@ -2,8 +2,8 @@
 services:
   frontend:
     build:
-      context: .
-      dockerfile: /spa_front/Dockerfile
+      context: ./spa_front
+      dockerfile: ./Dockerfile
     container_name: spa_front
     image: spa_front:latest
     ports:
@@ -14,8 +14,8 @@ services:
 
   backend:
     build:
-      context: .
-      dockerfile: /spa_back/Dockerfile
+      context: ./spa_back
+      dockerfile: ./Dockerfile
     container_name: spa_back
     image: spa_back:latest
     ports:
